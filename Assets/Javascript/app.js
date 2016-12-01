@@ -40,7 +40,80 @@ $(document).ready(function(){
 		return false;
 	});
 
-	
+	//function to get all the gifs to show on page
+	$(".moviesButtonList").on("click", ".clickMovie", function(){
+		$('.moviesGifSection').html("");
 
+		//grabing the name of the movie that was clicked on
+		var ButtonMovieName = $(this).data("name");
+
+		//personal check to see if movies button working or not
+		console.log(ButtonMovieName);
+
+		//public API key
+		var publicApiKey = "dc6zaTOxFJmzC";
+
+		//creating URL for movies name clicked on
+		var queryURL = "http://api.giphy.com/v1/gifs/search?q=" + ButtonMovieName + "&api_key=" + publicApiKey + "&limit=10";
+
+		//Ajax Request
+		$.ajax ({url: queryURL, method:"GET"})
+			.done(function(response){
+
+				//printing out quesrURL for personal use
+				console.log(queryURL);
+
+				var gifResults = response.data;
+
+				//console logging resposse object
+				console.log(gifResults);
+
+
+				//looping thru gifResults objects 
+				for (var i = 0; i < gifResults.length; i++) {
+
+					var moviesDiv = $("<div>");
+
+					var gifRating = $("<p>").text("Rating: " + gifResults[i].rating);
+
+					var moviesImage = $("<img>");
+
+					moviesImage.attr ({
+						"src": gifResults[i].images.fixed_height_still.url,
+						"data-still": gifResults[i].images.fixed_height_still.url,
+						"data-animated": gifResults[i].images.fixed_height_downsampled.url,
+						"data-state": "still",
+						//"class": "gif"
+					});
+					moviesImage.addClass("gif");
+
+					moviesDiv.append(gifRating);
+					moviesDiv.append(moviesImage);
+
+					$('.moviesGifSection').prepend(moviesDiv);
+				}
+
+
+			});
+
+	});
+
+	//function to animate gif on click
+ 	$('.gif').on("click", function() {
+     
+        var state = $(this).attr("data-state");
+
+        if (state === "still") {
+            $(this).attr("src",  $(this).attr("data-animate"));
+            $(this).attr("data-state", "animate")
+        }
+
+        else if (state!== "still") {
+            $(this).attr("src",  $(this).attr("data-still"));
+            $(this).attr("data-state", "still")
+        }
+
+	});
 
 });
+
