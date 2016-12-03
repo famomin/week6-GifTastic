@@ -11,21 +11,21 @@ $(document).ready(function(){
 	function renderButtons(){ 
 
 		// Deletes the movies prior to adding new movies 
-		$('.moviesButtonList').empty();
+		$(".moviesButtonList").empty();
 
 		// Loops through the array of movies
 		for (var i = 0; i < movies.length; i++){
 
-		    var moviesButton = $('<button>'); //creating buttons
-		    moviesButton.addClass('clickMovie btn btn-default'); // Added a class 
-		    moviesButton.attr('data-name', movies[i]); // Added a data-attribute
+		    var moviesButton = $("<button>"); //creating buttons
+		    moviesButton.addClass("clickMovie btn btn-default"); // Added a class 
+		    moviesButton.attr("data-name", movies[i]); // Added a data-attribute
 		    moviesButton.text(movies[i]); // giving text to all buttons
-		    $('.moviesButtonList').append(moviesButton); // appending buttons at the top of browswe
+		    $(".moviesButtonList").append(moviesButton); // appending buttons at the top of browswe
 		}
 	}
 
 	// function for user input on movies
-	$('#submitButton').on('click', function(){
+	$('#submitButton').on("click", function(){
 
 		//grabing user provided movie
 		var movie = $('#moviesInputList').val().trim();
@@ -42,7 +42,7 @@ $(document).ready(function(){
 
 	//function to get all the gifs to show on page
 	$(".moviesButtonList").on("click", ".clickMovie", function(){
-		$('.moviesGifSection').html("");
+		$(".moviesGifSection").html("");
 
 		//grabing the name of the movie that was clicked on
 		var ButtonMovieName = $(this).data("name");
@@ -78,19 +78,25 @@ $(document).ready(function(){
 
 					var moviesImage = $("<img>");
 
-					moviesImage.attr ({
-						"src": gifResults[i].images.fixed_height_still.url,
-						"data-still": gifResults[i].images.fixed_height_still.url,
-						"data-animated": gifResults[i].images.fixed_height_downsampled.url,
-						"data-state": "still",
-						//"class": "gif"
-					});
-					moviesImage.addClass("gif");
+					// moviesImage.attr ({
+					// 	"src": gifResults[i].images.original_still.url,
+					// 	"data-still": gifResults[i].images.original_still.url,
+					// 	"data-animated": gifResults[i].images.original.url,
+					// 	"data-state": "still"
+					// 	//"class": "gif" //not getting to if statements in fucntion to play/pause gif
+					// });
+					// moviesImage.addClass("gif");
+
+					moviesImage.attr("src", gifResults[i].images.original_still.url);
+    	 			moviesImage.attr("data-still", gifResults[i].images.original_still.url);
+    	 			moviesImage.attr("data-animate", gifResults[i].images.original.url);
+    	 			moviesImage.attr("data-state", "still");
+    	 			moviesImage.addClass("gif");
 
 					moviesDiv.append(gifRating);
 					moviesDiv.append(moviesImage);
 
-					$('.moviesGifSection').prepend(moviesDiv);
+					$(".moviesGifSection").prepend(moviesDiv);
 				}
 
 
@@ -99,19 +105,23 @@ $(document).ready(function(){
 	});
 
 	//function to animate gif on click
- 	$('.gif').on("click", function() {
+ 	$(document).on("click", ".gif", function() {
+ 		console.log("working"); //to check if this runs on clicks or not
      
         var state = $(this).attr("data-state");
 
         if (state === "still") {
+        	console.log("still Working"); //to check if this runs on clicks or not
             $(this).attr("src",  $(this).attr("data-animate"));
             $(this).attr("data-state", "animate")
         }
 
-        else if (state!== "still") {
+        else {
+        	console.log("not working"); //to check if this works on clicks or not
             $(this).attr("src",  $(this).attr("data-still"));
             $(this).attr("data-state", "still")
         }
+
 
 	});
 
