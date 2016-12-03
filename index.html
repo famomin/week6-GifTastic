@@ -8,28 +8,29 @@
 <body>
 	<div class="container-fluid"> <!-- Containter for the whole page -->
 		<div class="row"> <!-- movies list row -->
-			<div class="moviesButtonList"> <!-- movies Button here -->
-				
+			<div class="col-sm-10 col-sm-offset-1">
+				<div class="moviesButtonList"> <!-- movies Button here -->
+				</div>
 			</div>
 		</div> <!-- closing movies list row -->
 
 		<div class="row"> <!-- Row to look for new movie -->
+			<div class="col-sm-4 col-sm-offset-1">
+				<form>
+					<div class="form-group">
+					    <label for="moviesInputList">Type Name of your Movie</label>
+					    <input type="moviesText" class="form-control" id="moviesInputList" placeholder="Movie Name">
+					</div>
 
-			<form>
-				<div class="form-group">
-				    <label for="moviesInputList">Type Name of your Movie</label>
-				    <input type="moviesText" class="form-control" id="moviesInputList" placeholder="Movie Name">
-				</div>
-
-				<button type="submit" class="btn btn-default" id="submitButton">Submit</button>
-			</form>
-
+					<button type="submit" class="btn btn-default" id="submitButton">Submit</button>
+				</form>
+			</div>
 		</div>
 		
 		<div class="row">
-			<div class=" moviesGifSection">
-				
-			</div>
+			<div class="col-sm-10 col-sm-offset-1">
+				<div class=" moviesGifSection">	
+				</div>
 		</div>
 	</div> <!-- closing container -->
 
