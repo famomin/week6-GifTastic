@@ -44,7 +44,7 @@ $(document).ready(function(){
 		
 		else if(xyz>=0) {
 			console.log("already in the list");
-			alert(movie + "is already in the list.");
+			alert(movie + " is already in the list.");
 		}	
 
 		//empty for field after user hit submit button
@@ -75,7 +75,7 @@ $(document).ready(function(){
 		
 		else if(xyz<0) {
 			console.log("not in the list");
-			alert(movie + "is not in the list to remove.");
+			alert(movie + " is not in the list to remove.");
 		}	
 
 		//empty for field after user hit submit button
