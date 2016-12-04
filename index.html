@@ -6,6 +6,10 @@
 	<link rel="stylesheet" type="text/css" href="Assets/CSS/style.css">
 </head>
 <body>
+	<div class="jumbotron">
+		<h1 class="text-center">Movies Giphy</h1>
+	</div>
+	
 	<div class="container-fluid"> <!-- Containter for the whole page -->
 		<div class="row"> <!-- movies list row -->
 			<div class="col-sm-10 col-sm-offset-1">
@@ -22,7 +26,8 @@
 					    <input type="moviesText" class="form-control" id="moviesInputList" placeholder="Movie Name">
 					</div>
 
-					<button type="submit" class="btn btn-default" id="submitButton">Submit</button>
+					<button type="submit" class="btn btn-success" id="submitButton">Add Movie</button>
+					<button type="remove" class="btn btn-danger" id="removeButton">Remove Movie</button>
 				</form>
 			</div>
 		</div>
@@ -31,7 +36,8 @@
 			<div class="col-sm-10 col-sm-offset-1">
 				<div class=" moviesGifSection">	
 				</div>
-		</div>
+			</div>
+		</div>	
 	</div> <!-- closing container -->
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.0.js"></script>
