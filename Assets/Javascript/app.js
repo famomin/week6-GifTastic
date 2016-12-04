@@ -3,11 +3,11 @@ $(document).ready(function(){
 	var movies = ["Inception" , "The Dark Knight", "The Departed" , "Avatar", "Donnie Darko", 
 				  "District 9", "Zero Dark Thirty", "The Social Network", "The Avengers", "The Martian"];
 
-	//calling buttons to show at loading of page
+	//calling buttons to show when page loads
 	renderButtons();
 
 
-	// Function to create buttons of movies
+	// Function to create buttons for each movie movies
 	function renderButtons(){ 
 
 		// Deletes the movies prior to adding new movies 
@@ -17,7 +17,7 @@ $(document).ready(function(){
 		for (var i = 0; i < movies.length; i++){
 
 		    var moviesButton = $("<button>"); //creating buttons
-		    moviesButton.addClass("clickMovie btn btn-default"); // Added a class 
+		    moviesButton.addClass("clickMovie btn btn-primary"); // Added a class 
 		    moviesButton.attr("data-name", movies[i]); // Added a data-attribute
 		    moviesButton.text(movies[i]); // giving text to all buttons
 		    $(".moviesButtonList").append(moviesButton); // appending buttons at the top of browswe
@@ -30,15 +30,61 @@ $(document).ready(function(){
 		//grabing user provided movie
 		var movie = $('#moviesInputList').val().trim();
 
-		// pushing that movie to array
-		movies.push(movie);
+		//checking index of the movie input by user
+		var xyz = $.inArray(movie, movies);
+
+		//checking if the movie is already in the list
+		if (xyz<0) {
 			
-		// make it run thru render buttons function to create button for user movie
-		renderButtons();
+			//pushing that movie to array
+			movies.push(movie);					
+			//make it run thru render buttons function to create button for user movie
+			renderButtons();
+		}
+		
+		else if(xyz>=0) {
+			console.log("already in the list");
+			alert(movie + "is already in the list.");
+		}	
+
+		//empty for field after user hit submit button
+		$("#moviesInputList").val('');
+
+		// avoid refresh
+		return false;	
+	});
+
+
+	// function for user to remove on movies
+	$('#removeButton').on("click", function(){
+
+		//grabing user provided movie
+		var movie = $('#moviesInputList').val().trim();
+
+		//checking index of the movie input by user
+		var xyz = $.inArray(movie, movies);
+
+		//checking if the movie is already in the list
+		if (xyz>=0) {
+			
+			//pushing that movie to array
+			movies.splice(xyz,1);					
+			//make it run thru render buttons function to create button for user movie
+			renderButtons();
+		}
+		
+		else if(xyz<0) {
+			console.log("not in the list");
+			alert(movie + "is not in the list to remove.");
+		}	
+
+		//empty for field after user hit submit button
+		$("#moviesInputList").val('');
 
 		// avoid refresh
 		return false;
 	});
+
 
 	//function to get all the gifs to show on page
 	$(".moviesButtonList").on("click", ".clickMovie", function(){
@@ -78,15 +124,6 @@ $(document).ready(function(){
 
 					var moviesImage = $("<img>");
 
-					// moviesImage.attr ({
-					// 	"src": gifResults[i].images.original_still.url,
-					// 	"data-still": gifResults[i].images.original_still.url,
-					// 	"data-animated": gifResults[i].images.original.url,
-					// 	"data-state": "still"
-					// 	//"class": "gif" //not getting to if statements in fucntion to play/pause gif
-					// });
-					// moviesImage.addClass("gif");
-
 					moviesImage.attr("src", gifResults[i].images.original_still.url);
     	 			moviesImage.attr("data-still", gifResults[i].images.original_still.url);
     	 			moviesImage.attr("data-animate", gifResults[i].images.original.url);
@@ -113,13 +150,13 @@ $(document).ready(function(){
         if (state === "still") {
         	console.log("still Working"); //to check if this runs on clicks or not
             $(this).attr("src",  $(this).attr("data-animate"));
-            $(this).attr("data-state", "animate")
+            $(this).attr("data-state", "animate");
         }
 
         else {
         	console.log("not working"); //to check if this works on clicks or not
             $(this).attr("src",  $(this).attr("data-still"));
-            $(this).attr("data-state", "still")
+            $(this).attr("data-state", "still");
         }
 
 
